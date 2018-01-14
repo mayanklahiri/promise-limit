@@ -14,12 +14,9 @@ var limit = promiseLimit(2)
 
 var jobs = ['a', 'b', 'c', 'd', 'e']
 
-Promise.all(jobs.map((name) => {
-  return limit(() => job(name))
-})).then(results => {
-  console.log()
-  console.log('results:', results)
-})
+Promise.all(jobs.map(name => limit(() => job(name))))
+  .then(results => console.log('results:', results))
+
 
 function job (name) {
   var text = `job ${name}`
